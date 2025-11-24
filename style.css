@@ -1,0 +1,174 @@
+@charset "UTF-8";
+
+/* ==================== 기본 스타일 및 레이아웃 ==================== */
+body {
+    font-family: 'Malgun Gothic', 'Dotum', sans-serif;
+    background-color: #f8f9fa; /* 밝은 회색 배경 */
+    color: #343a40;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* 중앙 정렬 */
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 은은한 그림자 */
+}
+
+.main-title {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* API에서 넘어오는 검색 키워드 강조 처리 */
+b {
+    font-weight: bold;
+    color: #c0392b; /* 강조색 */
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #dee2e6;
+    margin: 20px 0;
+}
+
+/* ==================== 검색 폼 스타일 ==================== */
+.search-form {
+    display: flex; /* 가로로 배치 */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-label {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.search-input {
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    flex-grow: 1;
+    max-width: 300px;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #3498db; /* 강조 파란색 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+.search-button:hover {
+    background-color: #2980b9;
+}
+
+/* ==================== 테이블 스타일 ==================== */
+.result-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.result-table thead th {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #3498db; 
+    font-weight: 600;
+}
+
+.result-table tbody tr {
+    border-bottom: 1px solid #eceeef;
+    transition: background-color 0.2s;
+}
+
+.result-table tbody tr:hover {
+    background-color: #f1f4f8; 
+}
+
+/* 짝수 행에 배경색을 넣어 가독성 향상 (Zebra Stripe) */
+.result-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.result-table td {
+    padding: 12px;
+    vertical-align: top;
+    border: none;
+}
+
+.result-table td.num {
+    text-align: center;
+    color: #95a5a6;
+}
+
+/* 컬럼 넘침 시 한 줄로 자르고 ... 붙이는 CSS 로직 적용 */
+.result-table td.title, .result-table td.desc {
+    overflow: hidden;         /* 내용을 숨김 */
+    white-space: nowrap;      /* 줄바꿈을 하지 않음 (필수) */
+    text-overflow: ellipsis;  /* 넘치는 부분에 ... 표시 */
+}
+
+.result-table td.title {
+    font-weight: 600;
+    color: #2980b9; 
+    max-width: 300px; /* 제목 컬럼 최대 너비 지정 (브라우저가 ellipsis를 적용할 수 있도록) */
+}
+
+.result-table td.desc {
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.5;
+    max-width: 400px; /* 설명 컬럼 최대 너비 지정 */
+}
+
+.link-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f39c12; 
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+/* ==================== 페이징 스타일 ==================== */
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pagination a, .pagination strong.current-page {
+    padding: 8px 14px;
+    margin: 0 4px;
+    border: 1px solid #dee2e6;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #e9ecef;
+}
+
+.pagination strong.current-page {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+    font-weight: bold;
+}
