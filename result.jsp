@@ -4,39 +4,19 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>네이버 전문자료 통합 검색</title>
-  <style>
-    table {
-        border-collapse: collapse; /* cellspacing=0 효과 */
-        width: 100%;
-    }
-    table th, table td {
-        padding: 7px; /* cellpadding=7 효과 */
-        border: 1px solid #000;
-        vertical-align: top;
-    }
-    .pagination a, .pagination strong {
-        padding: 5px 10px;
-        margin: 0 2px;
-        border: 1px solid #ccc;
-        text-decoration: none;
-        display: inline-block;
-    }
-    .pagination strong {
-        background-color: #007bff;
-        color: white;
-        border-color: #007bff;
-    }
-  </style>
+  <title>네이버 전문자료 통합 검색 (최종)</title>
+  <link rel="stylesheet" type="text/css" href="style.css"> 
 </head>
-<body>
-  <h2>네이버 전문자료 통합 검색</h2>
-  <form method="get">
-    <label>검색어 :</label>
-    <input type="text" name="keyword"
+<body class="container">
+  
+  <h2 class="main-title">네이버 전문자료 통합 검색</h2>
+  
+  <form method="get" class="search-form"> 
+    <label for="keyword-input" class="search-label">검색어 :</label>
+    <input type="text" id="keyword-input" name="keyword" class="search-input"
       value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : "" %>"
       required>
-    <button type="submit">검색</button>
+    <button type="submit" class="search-button">검색</button>
   </form>
   <hr>
 
@@ -48,9 +28,9 @@
  
     // API 인증 정보 및 페이징 변수 설정
     String clientId = "qjXA6noEF39SPOkVulXB";
-    String clientSecret = "_EsP17fZuR"; // 정확한 Secret으로 수정 필요
+    String clientSecret = "_EsP17fZuR";
     
-    int display = 10;  // 한 페이지당 10개 보여주기
+    int display = 10;
     int curPage = 1;
     
     if (request.getParameter("page") != null) {
@@ -76,10 +56,9 @@
     BufferedReader br = null;
     
     JsonArray items = null;
-    int totalResults = 0; // 총 검색 결과 수를 저장할 변수
+    int totalResults = 0;
 
     try {
-      // new URL(String) Deprecated 경고 무시
       url = new URL(apiURL); 
       con = (HttpURLConnection) url.openConnection();
       con.setRequestMethod("GET");
@@ -92,7 +71,6 @@
       if (responseCode == 200) {
         br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
       } else {
-        // 오류 발생 시 디버깅을 위해 에러 스트림 내용을 출력
         br = new BufferedReader(new InputStreamReader(con.getErrorStream(), "UTF-8"));
         StringBuilder errorResponse = new StringBuilder();
         String line;
@@ -119,7 +97,6 @@
     } catch (Exception e) {
       out.println("API 호출 중 예외 발생: " + e.getMessage());
     } finally {
-      // Resource Leak 경고 방지, finally 블록에서 리소스 해제
       if (br != null) {
         try { br.close(); } catch (IOException ignored) {}
       }
@@ -131,13 +108,16 @@
     if (items != null) {
 %>
 
-  <table border="1" style="border-collapse: collapse;">
-    <tr>
-      <th>번호</th>
-      <th>제목</th>
-      <th>링크</th>
-      <th>설명</th>
-    </tr>
+  <table class="result-table">
+    <thead>
+        <tr>
+          <th style="width:50px;">번호</th>
+          <th>제목</th>
+          <th style="width:80px;">링크</th>
+          <th>설명</th>
+        </tr>
+    </thead>
+    <tbody>
 <%
       // 현재 페이지의 시작 번호
       int itemNum = start; 
@@ -149,32 +129,33 @@
         String desc = item.get("description").getAsString();
 %>
     <tr>
-      <td><%= itemNum++ %></td> <td><%= title %></td>
-      <td><a href="<%= link %>" target="_blank">바로가기</a></td>
-      <td><%= desc %></td>
-    </tr>
+      <td class="num"><%= itemNum++ %></td> 
+      <td class="title"><%= title %></td> <td><a href="<%= link %>" target="_blank" class="link-btn">바로가기</a></td>
+      <td class="desc"><%= desc %></td> </tr>
 <%
       }
 %>
+    </tbody>
   </table>
 
+  <div class="pagination">
   <p>페이지: 
 <%
       // Math.min(totalResults, 100)으로 최대 100개까지만 페이지를 계산
       int maxPages = (int) Math.ceil((double) Math.min(totalResults, 100) / display);
-      if (maxPages == 0 && totalResults > 0) maxPages = 1; // 검색 결과는 있으나 10개 미만일 때 1페이지 표시
-      if (maxPages == 0 && totalResults == 0) maxPages = 0; // 결과가 아예 없을 때는 페이지 표시 안함
+      if (maxPages == 0 && totalResults > 0) maxPages = 1;
+      if (maxPages == 0 && totalResults == 0) maxPages = 0;
 
       for (int i = 1; i <= maxPages; i++) {
         if (i == curPage) {
-          out.print("<strong>" + i + "</strong> ");
+          out.print("<strong class='current-page'>" + i + "</strong>");
         } else {
-          out.print("<a href=\"?keyword=" + URLEncoder.encode(keyword, "UTF-8") + "&page=" + i + "\">" + i + "</a> ");
+          out.print("<a href=\"?keyword=" + URLEncoder.encode(keyword, "UTF-8") + "&page=" + i + "\">" + i + "</a>");
         }
       }
 %>
   </p>
-
+  </div>
 <%
     } 
   } 
@@ -182,4 +163,3 @@
 
 </body>
 </html>
-
