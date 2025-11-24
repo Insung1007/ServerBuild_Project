@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>네이버 전문자료 통합 검색 (최종)</title>
+  <title>네이버 전문자료 통합 검색</title>
   <style>
     table {
         border-collapse: collapse; /* cellspacing=0 효과 */
@@ -182,3 +182,4 @@
 
 </body>
 </html>
+
