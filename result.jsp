@@ -114,7 +114,7 @@
           <th style="width:50px;">번호</th>
           <th>제목</th>
           <th style="width:80px;">링크</th>
-          <th>설명</th>
+          <th>내용</th>
         </tr>
     </thead>
     <tbody>
@@ -163,4 +163,5 @@
 
 </body>
 </html>
+
 
