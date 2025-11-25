@@ -27,8 +27,8 @@
   if (keyword != null && !keyword.trim().isEmpty()) {
  
     // API 인증 정보 및 페이징 변수 설정
-    String clientId = "";
-    String clientSecret = "";
+    String clientId = "qjXA6noEF39SPOkVulXB";
+    String clientSecret = "_EsP17fZuR";
     
     int display = 10;
     int curPage = 1;
@@ -114,7 +114,7 @@
           <th style="width:50px;">번호</th>
           <th>제목</th>
           <th style="width:80px;">링크</th>
-          <th>내용</th>
+          <th>설명</th>
         </tr>
     </thead>
     <tbody>
@@ -161,7 +161,16 @@
   } 
 %>
 
+<!-- DB 저장 버튼 추가 -->
+<hr>
+<form action="db.jsp" method="get"> 
+  <input type="hidden" name="keyword" 
+    value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : "" %>">
+  
+  <button type="submit" style="padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px;">
+    DB에 API 결과 100건 저장하기
+  </button>
+</form>
+
 </body>
 </html>
-
-
