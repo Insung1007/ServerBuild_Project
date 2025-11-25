@@ -27,8 +27,8 @@
   if (keyword != null && !keyword.trim().isEmpty()) {
  
     // API 인증 정보 및 페이징 변수 설정
-    String clientId = "qjXA6noEF39SPOkVulXB";
-    String clientSecret = "_EsP17fZuR";
+    String clientId = "";
+    String clientSecret = "";
     
     int display = 10;
     int curPage = 1;
@@ -174,3 +174,4 @@
 
 </body>
 </html>
+
