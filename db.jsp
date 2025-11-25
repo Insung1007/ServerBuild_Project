@@ -14,8 +14,8 @@
     final String USER = "root";   
     final String PASS = "1234";  
 
-    String clientId = ""; 
-    String clientSecret = ""; 
+    String clientId = " "; 
+    String clientSecret = " "; 
 
     
     request.setCharacterEncoding("UTF-8");
@@ -113,3 +113,4 @@
 </body>
 
 </html>
+
