@@ -100,7 +100,7 @@ hr {
     background-color: #f1f4f8; 
 }
 
-/* 짝수 행에 배경색을 넣어 가독성 향상 (Zebra Stripe) */
+/* 짝수 행에 배경색을 넣어 가독성 향상 */
 .result-table tbody tr:nth-child(even) {
     background-color: #fafafa;
 }
